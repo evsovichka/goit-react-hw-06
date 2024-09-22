@@ -15,16 +15,6 @@ function App() {
     window.localStorage.setItem("saved-contact", JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = (newContact) => {
-    setContacts([...contacts, newContact]);
-  };
-
-  const deleteContact = (deletecontactId) => {
-    setContacts((prevContacts) => {
-      return prevContacts.filter((contact) => contact.id !== deletecontactId);
-    });
-  };
-
   const [inputValue, setInputValue] = useState("");
 
   const filterContacts = contacts.filter((contact) =>
@@ -34,13 +24,11 @@ function App() {
   return (
     <div className="box">
       <h1>Phonebook</h1>
-      <ContactForm onAdd={addContact} />
+      <ContactForm />
       {contacts.length > 1 && (
         <SearchBox inputValue={inputValue} onSearch={setInputValue} />
       )}
-      {contacts.length > 0 && (
-        <ContactList contacts={filterContacts} onDelete={deleteContact} />
-      )}
+      {contacts.length > 0 && <ContactList />}
     </div>
   );
 }
